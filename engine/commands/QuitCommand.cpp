@@ -2,7 +2,8 @@
 // Created by marek on 18.10.23.
 //
 
-#include "QuitCommand.h"
+
+#include "../../include/command/engine_commands.h"
 
 void QuitCommand::run(std::string params) {
     engine->set_finished(true);

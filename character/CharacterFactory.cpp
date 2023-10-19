@@ -4,9 +4,7 @@
 
 #include <stdexcept>
 #include <iostream>
-#include "CharacterFactory.h"
-#include "Warrior.h"
-#include "Mage.h"
+#include "../include/character/factory.h"
 
 Character *PlayerCharacterFactory::createWarrior(const std::string &name) {
     auto *warrior = new Warrior(name);

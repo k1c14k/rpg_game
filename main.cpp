@@ -1,5 +1,5 @@
 #include <iostream>
-#include "engine/GameEngine.h"
+#include "include/engine.h"
 
 int main() {
     GameEngine engine("RPG Game");

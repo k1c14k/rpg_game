@@ -1,16 +1,12 @@
 //
-// Created by marek on 18.10.23.
+// Created by marek on 19.10.23.
 //
 
-#ifndef RPG_GAME_GAMEENGINE_H
-#define RPG_GAME_GAMEENGINE_H
+#ifndef RPG_GAME_ENGINE_H
+#define RPG_GAME_ENGINE_H
 
-
-#include <string>
-#include <utility>
-#include <map>
-#include "Command.h"
-#include "../character/Character.h"
+#include "command/command.h"
+#include "character/character.h"
 
 class GameEngine {
 public:
@@ -31,9 +27,7 @@ private:
     std::string title;
     bool finished = false;
     std::map<std::string, Command*> commands;
-    Character *player_character;
+    Character *player_character = nullptr;
 
 };
-
-
-#endif //RPG_GAME_GAMEENGINE_H
+#endif //RPG_GAME_ENGINE_H

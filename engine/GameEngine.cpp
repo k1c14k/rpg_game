@@ -3,10 +3,8 @@
 //
 
 #include <iostream>
-#include "GameEngine.h"
-#include "commands/QuitCommand.h"
-#include "commands/StartNewGameCommand.h"
-#include "commands/HelpCommand.h"
+#include "../include/engine.h"
+#include "../include/command/engine_commands.h"
 
 void GameEngine::run() {
     std::cout << "Welcome to " << title << std::endl;

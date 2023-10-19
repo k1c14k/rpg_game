@@ -1,10 +1,9 @@
 //
-// Created by marek on 18.10.23.
+// Created by marek on 19.10.23.
 //
 
 #ifndef RPG_GAME_COMMAND_H
 #define RPG_GAME_COMMAND_H
-
 
 #include <string>
 
@@ -14,6 +13,5 @@ public:
 
     virtual std::string get_title() = 0;
 };
-
 
 #endif //RPG_GAME_COMMAND_H

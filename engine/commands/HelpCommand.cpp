@@ -3,7 +3,7 @@
 //
 
 #include <iostream>
-#include "HelpCommand.h"
+#include "../../include/command/engine_commands.h"
 
 void HelpCommand::run(std::string params) {
     std::cout << "Available commands:" << std::endl;

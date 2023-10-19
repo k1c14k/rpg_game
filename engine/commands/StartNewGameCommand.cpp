@@ -3,8 +3,8 @@
 //
 
 #include <iostream>
-#include "StartNewGameCommand.h"
-#include "../../character/CharacterFactory.h"
+#include "../../include/command/engine_commands.h"
+#include "../../include/character/factory.h"
 
 void StartNewGameCommand::run(std::string params) {
     std::cout << "Starting new game..." << std::endl;

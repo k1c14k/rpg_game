@@ -5,10 +5,9 @@
 #ifndef RPG_GAME_CHARACTER_H
 #define RPG_GAME_CHARACTER_H
 
-
 #include <string>
 #include <map>
-#include "Ability.h"
+#include "ability.h"
 
 class Character {
 private:
@@ -37,6 +36,22 @@ public:
     void add_ability(const char *string, Ability *pAbility);
 };
 
+class Warrior : public Character {
+public:
+    explicit Warrior(const std::string &name) : Character(name, 1, 150, 0, {}) {};
+
+    std::string character_class() override;
+};
+
+
+
+class Mage : public Character {
+public:
+    explicit Mage(const std::string &name) : Character(name, 1, 75, 0, {}) {};
+
+    std::string character_class() override;
+};
+
 
 class Archer : public Character {
 public:
@@ -44,6 +59,5 @@ public:
 
     std::string character_class() override;
 };
-
 
 #endif //RPG_GAME_CHARACTER_H

@@ -2,9 +2,10 @@
 // Created by marek on 19.10.23.
 //
 
-#include "Character.h"
+
 
 #include <utility>
+#include "../include/character/character.h"
 
 Character::Character(std::string name, unsigned int level, unsigned int health, unsigned int experience,
                      const std::map<std::string, Ability *> &abilities) : name(std::move(name)), level(level), health(health),
