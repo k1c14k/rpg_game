@@ -47,6 +47,21 @@ Character *PlayerCharacterFactory::createMage(const std::string &name) {
 
 Character *PlayerCharacterFactory::createArcher(const std::string &name) {
     auto *archer = new Archer(name);
+    std::cout << "Pick your preferred weapon:" << std::endl;
+    std::cout << "Possible options: bow, crossbow" << std::endl;
+    std::string tension_weapon;
+    do {
+        std::cin >> tension_weapon;
+    } while (!is_valid_tenstion_weapon(tension_weapon));
+
+    if(tension_weapon == "bow") {
+        archer->add_ability("bow", new BowAbility(3));
+        archer->add_ability("crossbow", new CrossBowAbility(1));
+    } else if (tension_weapon == "crossbow") {
+        archer->add_ability("bow", new BowAbility(1));
+        archer->add_ability("crossbow", new CrossBowAbility(3));
+    }
+
     return archer;
 }
 
@@ -64,6 +79,13 @@ bool PlayerCharacterFactory::is_valid_magic_type(std::string magic) {
         return false;
     }
     return true;
+}
+bool PlayerCharacterFactory::is_valid_tenstion_weapon( std::string& basicString) {
+    if (basicString == "bow" || basicString == "crossbow") {
+        return true;
+    }
+    std::cout << "Invalid weapon. Pick again: " << std::endl;
+    return false;
 }
 
 Character *CharacterFactory::create(const std::string &character_class, const std::string &name) {

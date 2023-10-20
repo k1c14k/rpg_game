@@ -47,4 +47,18 @@ public:
     explicit DaggerAbility(unsigned int level) : Ability(level) {};
 };
 
+class BowAbility : public Ability {
+public:
+    std::string get_title() override;
+
+    explicit BowAbility(unsigned int level) : Ability(level) {};
+};
+
+class CrossBowAbility : public Ability {
+public:
+    std::string get_title() override;
+
+    explicit CrossBowAbility(unsigned int level) : Ability(level) {};
+};
+
 #endif //RPG_GAME_ABILITY_H

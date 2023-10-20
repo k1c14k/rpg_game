@@ -36,6 +36,6 @@ void Character::add_ability(const char *string, Ability *pAbility) {
     abilities[string] = pAbility;
 }
 
-std::string Archer::character_class() {
-    return "archer";
-}
+//std::string Archer::character_class() {
+//    return "archer";
+//}
