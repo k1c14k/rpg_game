@@ -52,7 +52,7 @@ Character *PlayerCharacterFactory::createArcher(const std::string &name) {
     std::string tension_weapon;
     do {
         std::cin >> tension_weapon;
-    } while (!is_valid_tenstion_weapon(tension_weapon));
+    } while (!is_valid_tension_weapon(tension_weapon));
 
     if(tension_weapon == "bow") {
         archer->add_ability("bow", new BowAbility(3));
@@ -73,14 +73,15 @@ bool PlayerCharacterFactory::is_valid_weapon(const std::string& basicString) {
     return false;
 }
 
-bool PlayerCharacterFactory::is_valid_magic_type(std::string magic) {
+bool PlayerCharacterFactory::is_valid_magic_type(const std::string &magic) {
     if (magic != "fire" && magic != "ice") {
         std::cout << "Invalid magic type. Pick again: " << std::endl;
         return false;
     }
     return true;
 }
-bool PlayerCharacterFactory::is_valid_tenstion_weapon( std::string& basicString) {
+
+bool PlayerCharacterFactory::is_valid_tension_weapon(std::string &basicString) {
     if (basicString == "bow" || basicString == "crossbow") {
         return true;
     }

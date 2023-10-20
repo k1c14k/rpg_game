@@ -18,4 +18,5 @@ add_executable(rpg_game main.cpp
         include/command/command.h
         include/character/character.h
         include/character/ability.h
-        include/character/factory.h)
+        include/character/factory.h
+        character/Archer.cpp)
