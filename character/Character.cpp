@@ -5,6 +5,7 @@
 
 
 #include <utility>
+#include <random>
 #include "../include/character/character.h"
 
 Character::Character(std::string name, unsigned int level, unsigned int health, unsigned int experience,
@@ -34,5 +35,21 @@ const std::map<std::string, Ability *> &Character::get_abilities() const {
 
 void Character::add_ability(const char *string, Ability *pAbility) {
     abilities[string] = pAbility;
+}
+
+unsigned long Character::get_attack() const {
+    unsigned long max_attack = level < 5 ? level : 5;
+    std::random_device rd;
+    std::mt19937 mt(rd());
+    std::uniform_int_distribution<unsigned int> dist(0, max_attack);
+    return dist(mt);
+}
+
+void Character::take_damage(unsigned long damage) {
+    health -= damage;
+}
+
+Ability *Character::get_ability(const std::string &ability) {
+    return abilities[ability];
 }
 

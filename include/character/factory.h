@@ -33,4 +33,19 @@ public:
     static bool is_valid_tension_weapon(std::string &basicString);
 };
 
+class OpponentCharacterFactory : public CharacterFactory {
+public:
+    Character *createWarrior(const std::string &name) override;
+
+    Character *createMage(const std::string &name) override;
+
+    Character *createArcher(const std::string &name) override;
+
+    Character *createRandomOpponent(unsigned long level);
+
+    static std::string generate_random_name();
+
+    static void distribute_ability_points(Character *pCharacter, unsigned long points);
+};
+
 #endif //RPG_GAME_FACTORY_H

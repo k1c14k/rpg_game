@@ -23,17 +23,23 @@ public:
 
     [[nodiscard]] const std::string &get_name() const;
 
-    unsigned int get_level() const;
+    [[nodiscard]] unsigned int get_level() const;
 
-    unsigned int get_health() const;
+    [[nodiscard]] unsigned int get_health() const;
 
-    unsigned int get_experience() const;
+    [[nodiscard]] unsigned int get_experience() const;
 
-    const std::map<std::string, Ability *> &get_abilities() const;
+    [[nodiscard]] const std::map<std::string, Ability *> &get_abilities() const;
 
     virtual std::string character_class() = 0;
 
     void add_ability(const char *string, Ability *pAbility);
+
+    [[nodiscard]] unsigned long get_attack() const;
+
+    void take_damage(unsigned long damage);
+
+    Ability *get_ability(const std::string &ability);
 };
 
 class Warrior : public Character {

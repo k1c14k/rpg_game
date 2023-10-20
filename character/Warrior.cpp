@@ -12,6 +12,14 @@ std::string SwordAbility::get_title() {
     return "Sword fight";
 }
 
+unsigned long SwordAbility::get_damage() const {
+    return level * 10;
+}
+
 std::string DaggerAbility::get_title() {
     return "Dagger fight";
+}
+
+unsigned long DaggerAbility::get_damage() const {
+    return level * 5;
 }

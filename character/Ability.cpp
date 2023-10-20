@@ -8,3 +8,7 @@
 unsigned int Ability::get_level() const {
     return level;
 }
+
+void Ability::set_level(unsigned long i) {
+    level = i;
+}

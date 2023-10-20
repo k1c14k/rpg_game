@@ -5,6 +5,7 @@
 #include <iostream>
 #include "../../include/command/engine_commands.h"
 #include "../../include/character/factory.h"
+#include "../../include/battle.h"
 
 void StartNewGameCommand::run(std::string params) {
     std::cout << "Starting new game..." << std::endl;
@@ -21,8 +22,10 @@ void StartNewGameCommand::run(std::string params) {
     } while(!is_valid_class(character_class));
 
     CharacterFactory* factory = new PlayerCharacterFactory();
-    engine->set_player_character(factory->create(character_class, name));
+    Character *character = factory->create(character_class, name);
+    engine->set_player_character(character);
     engine->add_command("info", new InfoCommand(engine));
+    engine->add_command("battle", new BattleCommand(character));
 }
 
 std::string StartNewGameCommand::get_title() {
