@@ -28,7 +28,9 @@ public:
 
     static bool is_valid_weapon(const std::string &basicString);
 
-    static bool is_valid_magic_type(std::string magic);
+    static bool is_valid_magic_type(const std::string &magic);
+
+    static bool is_valid_tension_weapon(std::string &basicString);
 };
 
 #endif //RPG_GAME_FACTORY_H
