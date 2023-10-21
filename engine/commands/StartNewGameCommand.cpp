@@ -9,20 +9,11 @@
 
 void StartNewGameCommand::run(std::string params) {
     std::cout << "Starting new game..." << std::endl;
-    std::cout << "Choose your name: ";
-    std::string name;
-    std::cin >> name;
-    std::cout << "Hello, " << name << "!" << std::endl;
-    std::cout << "What is your character's class?" << std::endl;
-    std::cout << "Possible options: warrior, mage, archer" << std::endl;
-    std::cout << "Choose your class: ";
-    std::string character_class;
-    do {
-        std::cin >> character_class;
-    } while(!is_valid_class(character_class));
+    std::string name = prompt_for_name();
+    std::string character_class = prompt_for_class();
+    AbstractCharacterFactory *factory = AbstractCharacterFactory::get_factory(character_class);
+    Character *character = factory->create_player(name);
 
-    CharacterFactory* factory = new PlayerCharacterFactory();
-    Character *character = factory->create(character_class, name);
     engine->set_player_character(character);
     engine->add_command("info", new InfoCommand(engine));
     engine->add_command("battle", new BattleCommand(character));
@@ -38,6 +29,25 @@ bool StartNewGameCommand::is_valid_class(const std::string& basicString) {
     }
     std::cout << "Invalid class. Choose again: ";
     return false;
+}
+
+std::string StartNewGameCommand::prompt_for_name() {
+    std::cout << "Choose your name: ";
+    std::string name;
+    std::cin >> name;
+    std::cout << "Hello, " << name << "!" << std::endl;
+    return name;
+}
+
+std::string StartNewGameCommand::prompt_for_class() {
+    std::cout << "What is your character's class?" << std::endl;
+    std::cout << "Possible options: warrior, mage, archer" << std::endl;
+    std::cout << "Choose your class: ";
+    std::string character_class;
+    do {
+        std::cin >> character_class;
+    } while (!is_valid_class(character_class));
+    return character_class;
 }
 
 void InfoCommand::run(std::string params) {

@@ -42,6 +42,10 @@ public:
     static bool is_valid_class(const std::string &basicString);
 
     explicit StartNewGameCommand(GameEngine *pEngine) : engine(pEngine) {};
+
+    static std::string prompt_for_name();
+
+    static std::string prompt_for_class();
 };
 
 class InfoCommand : public Command {

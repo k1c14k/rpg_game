@@ -27,8 +27,7 @@ void BattleCommand::run(std::string params) {
 
     opponent_level = opponent_level >= 1 ? opponent_level : 1;
 
-    auto *factory = new OpponentCharacterFactory();
-    Character *opponent = factory->createRandomOpponent(opponent_level);
+    Character *opponent = AbstractCharacterFactory::create_opponent(opponent_level);
     BattleSystem::start_battle(player_character, opponent);
 }
 

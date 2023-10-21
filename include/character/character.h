@@ -7,6 +7,7 @@
 
 #include <string>
 #include <map>
+#include <utility>
 #include "ability.h"
 
 class Character {
@@ -33,8 +34,6 @@ public:
 
     virtual std::string character_class() = 0;
 
-    void add_ability(const char *string, Ability *pAbility);
-
     [[nodiscard]] unsigned long get_attack() const;
 
     void take_damage(unsigned long damage);
@@ -44,7 +43,8 @@ public:
 
 class Warrior : public Character {
 public:
-    explicit Warrior(const std::string &name) : Character(name, 1, 150, 0, {}) {};
+    explicit Warrior(const std::string &name, const std::map<std::string, Ability *> &abilities, unsigned int level = 1)
+            : Character(name, level, 150, 0, abilities) {};
 
     std::string character_class() override;
 };
@@ -53,7 +53,8 @@ public:
 
 class Mage : public Character {
 public:
-    explicit Mage(const std::string &name) : Character(name, 1, 75, 0, {}) {};
+    explicit Mage(const std::string &name, const std::map<std::string, Ability *> &abilities, unsigned int level = 1)
+            : Character(name, level, 75, 0, abilities) {};
 
     std::string character_class() override;
 };
@@ -61,7 +62,8 @@ public:
 
 class Archer : public Character {
 public:
-    explicit Archer(const std::string &name) : Character(name, 1, 100, 0, {}) {};
+    explicit Archer(const std::string &name, const std::map<std::string, Ability *> &abilities, unsigned int level = 1)
+            : Character(name, level, 100, 0, abilities) {};
 
     std::string character_class() override;
 };
