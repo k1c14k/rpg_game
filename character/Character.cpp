@@ -33,10 +33,6 @@ const std::map<std::string, Ability *> &Character::get_abilities() const {
     return abilities;
 }
 
-void Character::add_ability(const char *string, Ability *pAbility) {
-    abilities[string] = pAbility;
-}
-
 unsigned long Character::get_attack() const {
     unsigned long max_attack = level < 5 ? level : 5;
     std::random_device rd;
