@@ -9,7 +9,8 @@
 #include "../include/character/character.h"
 
 Character::Character(std::string name, unsigned int level, unsigned int health, unsigned int experience,
-                     const std::map<std::string, Ability *> &abilities) : name(std::move(name)), level(level), health(health),
+                     const std::map<std::string, Ability *> &abilities) : name(std::move(name)), level(level),
+                                                                          health(health),
                                                                           experience(experience),
                                                                           abilities(abilities) {}
 
@@ -42,7 +43,8 @@ unsigned long Character::get_attack() const {
 }
 
 void Character::take_damage(unsigned long damage) {
-    health -= damage * 60;
+    unsigned long damage_taken = damage * 60;
+    health -= damage_taken > health ? health : damage_taken;
 }
 
 Ability *Character::get_ability(const std::string &ability) {
