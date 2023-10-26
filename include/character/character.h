@@ -43,6 +43,8 @@ public:
     void subtract_experience(unsigned long experience);
 
     Ability *get_ability(const std::string &ability);
+
+    [[nodiscard]] bool is_alive() const;
 };
 
 class Warrior : public Character {

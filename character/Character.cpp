@@ -49,6 +49,10 @@ Ability *Character::get_ability(const std::string &ability) {
     return abilities[ability];
 }
 
+bool Character::is_alive() const {
+    return health > 0;
+}
+
 void Character::add_experience(unsigned long experience) {
     this->experience += experience;
 
