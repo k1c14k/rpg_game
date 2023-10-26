@@ -42,10 +42,19 @@ unsigned long Character::get_attack() const {
 }
 
 void Character::take_damage(unsigned long damage) {
-    health -= damage;
+    health -= damage * 60;
 }
 
 Ability *Character::get_ability(const std::string &ability) {
     return abilities[ability];
 }
 
+void Character::add_experience(unsigned long experience) {
+    this->experience += experience;
+
+}
+
+void Character::subtract_experience(unsigned long experience) {
+    this->experience -= experience;
+
+}

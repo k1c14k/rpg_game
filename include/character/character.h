@@ -38,6 +38,10 @@ public:
 
     void take_damage(unsigned long damage);
 
+    void add_experience(unsigned long experience);
+
+    void subtract_experience(unsigned long experience);
+
     Ability *get_ability(const std::string &ability);
 };
 

@@ -12,7 +12,10 @@ BattleSystem *BattleSystem::getInstance() {
 
 void BattleSystem::start_battle(Character *player, Character *opponent) {
     std::cout << "Battle started!" << std::endl;
-    while (player->get_health() > 0 && opponent->get_health() > 0) {
+    unsigned int initial_oponent_health = opponent->get_health();
+    unsigned int initial_player_health = player->get_health();
+    while ((player->get_health() > 0 && player->get_health() <= initial_player_health) &&
+           (opponent->get_health() > 0 && opponent->get_health() <= initial_oponent_health)) {
         std::cout << "Player health: " << player->get_health() << std::endl;
         std::cout << "Opponent health: " << opponent->get_health() << std::endl;
         std::cout << "Choose action: " << std::endl;
@@ -38,4 +41,13 @@ void BattleSystem::start_battle(Character *player, Character *opponent) {
             opponent->take_damage(player->get_ability(ability)->get_damage());
         }
     }
+    if (opponent->get_health() > initial_oponent_health) {
+        std::cout << "You won!" << std::endl;
+        player->add_experience(opponent->get_level() * 10);
+    }
+    if (player->get_health() > initial_player_health) {
+        std::cout << "You lost!" << std::endl;
+        player->subtract_experience(opponent->get_level() * 2);
+    }
 }
+
