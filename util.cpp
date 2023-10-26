@@ -4,6 +4,7 @@
 #include <iostream>
 #include <random>
 #include "include/util.h"
+#include "algorithm"
 
 std::string prompt_for_choice(const std::string &prompt, std::vector<std::string> &choices) {
     std::cout << prompt << std::endl;
