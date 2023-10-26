@@ -55,12 +55,12 @@ bool Character::is_alive() const {
     return health > 0;
 }
 
-void Character::add_experience(unsigned long experience) {
-    this->experience += experience;
+void Character::add_experience(unsigned long experience_gained) {
+    this->experience += experience_gained;
 
 }
 
-void Character::subtract_experience(unsigned long experience) {
-    this->experience -= experience;
+void Character::subtract_experience(unsigned long experience_lost) {
+    this->experience -= experience_lost;
 
 }
