@@ -5,7 +5,7 @@
 #include "../../include/character/factory.h"
 #include "../../include/util.h"
 
-Character *WarriorCharacterFactory::create_player(std::string &name) {
+PlayerCharacter * WarriorCharacterFactory::create_player(std::string &name) {
     std::string weapon_name = prompt_for_choice("Pick your preferred weapon:", WEAPON_CHOICES);
 
     std::map<std::string, Ability *> abilities;
@@ -17,10 +17,11 @@ Character *WarriorCharacterFactory::create_player(std::string &name) {
         abilities["dagger"] = Ability::of("dagger", 3);
     }
 
-    return new Warrior(name, abilities);
+    auto *pWarrior = new Warrior(name, abilities);
+    return new PlayerCharacter(pWarrior, 1, 0);
 }
 
-Character *WarriorCharacterFactory::create_random_opponent(unsigned int level) {
+BaseCharacter *WarriorCharacterFactory::create_random_opponent(unsigned int level) {
     static std::vector<std::string> NAMES = {"Goblin", "Orc", "Troll"};
     std::map<std::string, Ability *> abilities;
     unsigned int ability_points = level * 4;
@@ -28,6 +29,6 @@ Character *WarriorCharacterFactory::create_random_opponent(unsigned int level) {
     unsigned int ability2 = ability_points - ability1;
     abilities["sword"] = Ability::of("sword", ability1);
     abilities["dagger"] = Ability::of("dagger", ability2);
-    auto *warrior = new Warrior(random_choice(NAMES), abilities, level);
+    auto *warrior = new Warrior(random_choice(NAMES), abilities);
     return warrior;
 }

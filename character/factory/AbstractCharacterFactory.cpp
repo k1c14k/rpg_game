@@ -17,7 +17,7 @@ AbstractCharacterFactory *AbstractCharacterFactory::get_factory(const std::strin
     throw std::invalid_argument("Invalid character class");
 }
 
-Character *AbstractCharacterFactory::create_opponent(unsigned int level) {
+BaseCharacter *AbstractCharacterFactory::create_opponent(unsigned int level) {
     static std::vector<std::string> CLASS_CHOICES = {"warrior", "mage", "archer"};
     auto character_class = random_choice(CLASS_CHOICES);
     AbstractCharacterFactory *factory = get_factory(character_class);

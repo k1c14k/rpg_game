@@ -17,17 +17,17 @@ public:
 
     std::map<std::string, Command *> get_commands();
 
-    void set_player_character(Character *pCharacter);
+    void set_player_character(PlayerCharacter *pCharacter);
 
     void add_command(const char *string, Command *pCommand);
 
-    Character * get_player_character();
+    PlayerCharacter *get_player_character();
 
 private:
     std::string title;
     bool finished = false;
     std::map<std::string, Command*> commands;
-    Character *player_character = nullptr;
+    PlayerCharacter *player_character = nullptr;
 
 };
 #endif //RPG_GAME_ENGINE_H

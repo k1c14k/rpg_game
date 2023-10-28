@@ -27,4 +27,5 @@ add_executable(rpg_game main.cpp
         character/factory/MageCharacterFactory.cpp
         character/factory/ArcherCharacterFactory.cpp
         include/util.h
-        util.cpp)
+        util.cpp
+        character/PlayerCharacter.cpp)

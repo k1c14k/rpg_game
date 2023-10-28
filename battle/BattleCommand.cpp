@@ -27,7 +27,7 @@ void BattleCommand::run(std::string params) {
 
     opponent_level = opponent_level >= 1 ? opponent_level : 1;
 
-    Character *opponent = AbstractCharacterFactory::create_opponent(opponent_level);
+    BaseCharacter *opponent = AbstractCharacterFactory::create_opponent(opponent_level);
     BattleSystem::start_battle(player_character, opponent);
 }
 

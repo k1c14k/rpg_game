@@ -11,67 +11,114 @@
 #include "ability.h"
 
 class Character {
-private:
-    std::string name;
-    unsigned int level;
-    unsigned int health;
-    unsigned int experience;
-    std::map<std::string, Ability *> abilities;
-protected:
 public:
-    Character(std::string name, unsigned int level, unsigned int health, unsigned int experience,
-              const std::map<std::string, Ability *> &abilities);
 
-    [[nodiscard]] const std::string &get_name() const;
+    [[nodiscard]] virtual const std::string &get_name() const = 0;
 
-    [[nodiscard]] unsigned int get_level() const;
-
-    [[nodiscard]] unsigned int get_health() const;
-
-    [[nodiscard]] unsigned int get_experience() const;
-
-    [[nodiscard]] const std::map<std::string, Ability *> &get_abilities() const;
+    [[nodiscard]] virtual const std::map<std::string, Ability *> &get_abilities() const = 0;
 
     virtual std::string character_class() = 0;
 
-    [[nodiscard]] unsigned long get_attack() const;
+    [[nodiscard]] virtual unsigned long get_attack() const = 0;
 
-    void take_damage(unsigned long damage);
+    virtual void take_damage(unsigned long damage) = 0;
 
-    void add_experience(unsigned long experience_gained);
+    virtual Ability *get_ability(const std::string &ability) = 0;
 
-    void subtract_experience(unsigned long experience_lost);
+    [[nodiscard]] virtual bool is_alive() const = 0;
 
-    Ability *get_ability(const std::string &ability);
-
-    [[nodiscard]] bool is_alive() const;
+    [[nodiscard]] virtual unsigned int get_health() const = 0;
 };
 
-class Warrior : public Character {
+class BaseCharacter : public Character {
+private:
+    std::string name;
+    unsigned int health;
+    std::map<std::string, Ability *> abilities;
+protected:
 public:
-    explicit Warrior(const std::string &name, const std::map<std::string, Ability *> &abilities, unsigned int level = 1)
-            : Character(name, level, 150, 0, abilities) {};
+    [[nodiscard]] const std::string &get_name() const override;
+
+    [[nodiscard]] unsigned int get_health() const override;
+
+    [[nodiscard]] const std::map<std::string, Ability *> &get_abilities() const override;
+
+    void take_damage(unsigned long damage) override;
+
+    Ability *get_ability(const std::string &ability) override;
+
+    [[nodiscard]] bool is_alive() const override;
+
+    BaseCharacter(std::string name, unsigned int health,
+                  const std::map<std::string, Ability *> &abilities);
+};
+
+class Warrior : public BaseCharacter {
+public:
+    explicit Warrior(const std::string &name, const std::map<std::string, Ability *> &abilities)
+            : BaseCharacter(name, 150, abilities) {};
 
     std::string character_class() override;
+
+    [[nodiscard]] unsigned long get_attack() const override;
 };
 
 
-
-class Mage : public Character {
+class Mage : public BaseCharacter {
 public:
-    explicit Mage(const std::string &name, const std::map<std::string, Ability *> &abilities, unsigned int level = 1)
-            : Character(name, level, 75, 0, abilities) {};
+    explicit Mage(const std::string &name, const std::map<std::string, Ability *> &abilities)
+            : BaseCharacter(name, 75, abilities) {};
 
     std::string character_class() override;
+
+    [[nodiscard]] unsigned long get_attack() const override;
 };
 
 
-class Archer : public Character {
+class Archer : public BaseCharacter {
 public:
-    explicit Archer(const std::string &name, const std::map<std::string, Ability *> &abilities, unsigned int level = 1)
-            : Character(name, level, 100, 0, abilities) {};
+    explicit Archer(const std::string &name, const std::map<std::string, Ability *> &abilities)
+            : BaseCharacter(name, 100, abilities) {};
 
     std::string character_class() override;
+
+    [[nodiscard]] unsigned long get_attack() const override;
+};
+
+class PlayerCharacter : public Character {
+private:
+    Character *character;
+    unsigned int level;
+    unsigned int experience;
+public:
+    explicit PlayerCharacter(Character *character, unsigned int level, unsigned int experience) : character(character),
+                                                                                                  level(level),
+                                                                                                  experience(
+                                                                                                          experience) {};
+
+    [[nodiscard]] const std::string &get_name() const override;
+
+    [[nodiscard]] const std::map<std::string, Ability *> &get_abilities() const override;
+
+    std::string character_class() override;
+
+    [[nodiscard]] unsigned long get_attack() const override;
+
+    void take_damage(unsigned long damage) override;
+
+    Ability *get_ability(const std::string &ability) override;
+
+    [[nodiscard]] bool is_alive() const override;
+
+    [[nodiscard]] unsigned int get_health() const override;
+
+    [[nodiscard]] unsigned int get_level() const;
+
+    [[nodiscard]] unsigned int get_experience() const;
+
+    void add_experience(unsigned int experience_gained);
+
+    void subtract_experience(int experience_lost);
 };
 
 #endif //RPG_GAME_CHARACTER_H

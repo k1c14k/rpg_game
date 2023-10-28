@@ -10,13 +10,13 @@
 
 class BattleCommand : public Command {
 private:
-    Character *player_character;
+    PlayerCharacter *player_character;
 public:
     void run(std::string params) override;
 
     std::string get_title() override;
 
-    explicit BattleCommand(Character *pCharacter) : player_character(pCharacter) {};
+    explicit BattleCommand(PlayerCharacter *pCharacter) : player_character(pCharacter) {};
 
     static bool is_valid_difficulty(const std::string &basicString);
 };
@@ -24,9 +24,10 @@ public:
 class BattleSystem {
 
 public:
-    static BattleSystem *getInstance();
 
-    static void start_battle(Character *player, Character *opponent);
+    static void start_battle(PlayerCharacter *player, BaseCharacter *opponent);
+
+    static unsigned int experience_for_level(unsigned int level);
 };
 
 #endif //RPG_GAME_BATTLE_H

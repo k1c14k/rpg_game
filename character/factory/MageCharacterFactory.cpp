@@ -5,7 +5,7 @@
 #include "../../include/character/factory.h"
 #include "../../include/util.h"
 
-Character *MageCharacterFactory::create_player(std::string &name) {
+PlayerCharacter * MageCharacterFactory::create_player(std::string &name) {
     std::string magic = prompt_for_choice("Pick your flavor of magic:", MAGIC_CHOICES);
 
     std::map<std::string, Ability *> abilities;
@@ -18,10 +18,11 @@ Character *MageCharacterFactory::create_player(std::string &name) {
         abilities["ice"] = Ability::of("ice", 3);
     }
 
-    return new Mage(name, abilities);
+    auto *pMage = new Mage(name, abilities);
+    return new PlayerCharacter(pMage, 1, 0);
 }
 
-Character *MageCharacterFactory::create_random_opponent(unsigned int level) {
+BaseCharacter *MageCharacterFactory::create_random_opponent(unsigned int level) {
     static std::vector<std::string> NAMES = {"Merlin", "Harry", "Gandalf"};
     std::map<std::string, Ability *> abilities;
     unsigned int ability_points = level * 4;
@@ -29,5 +30,5 @@ Character *MageCharacterFactory::create_random_opponent(unsigned int level) {
     unsigned int ability2 = ability_points - ability1;
     abilities["fire"] = Ability::of("fireball", ability1);
     abilities["ice"] = Ability::of("iceball", ability2);
-    return new Mage(random_choice(NAMES), abilities, level);
+    return new Mage(random_choice(NAMES), abilities);
 }

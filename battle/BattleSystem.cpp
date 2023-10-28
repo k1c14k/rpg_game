@@ -5,12 +5,8 @@
 #include <iostream>
 #include "../include/battle.h"
 
-BattleSystem *BattleSystem::getInstance() {
-    static BattleSystem instance;
-    return &instance;
-}
 
-void BattleSystem::start_battle(Character *player, Character *opponent) {
+void BattleSystem::start_battle(PlayerCharacter *player, BaseCharacter *opponent) {
     std::cout << "Battle started!" << std::endl;
 
     while (player->is_alive() && opponent->is_alive()) {
@@ -41,11 +37,15 @@ void BattleSystem::start_battle(Character *player, Character *opponent) {
     }
     if (!opponent->is_alive()) {
         std::cout << "You won!" << std::endl;
-        player->add_experience(opponent->get_level() * 10);
+        player->add_experience(experience_for_level(player->get_level()));
     }
     if (!player->is_alive()) {
         std::cout << "You lost!" << std::endl;
-        player->subtract_experience(opponent->get_level() * 2);
+        player->subtract_experience(15);
     }
+}
+
+unsigned int BattleSystem::experience_for_level(unsigned int level) {
+    return level * 50;
 }
 

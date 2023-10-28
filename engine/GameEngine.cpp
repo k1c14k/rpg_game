@@ -43,7 +43,7 @@ std::map<std::string, Command*> GameEngine::get_commands() {
     return commands;
 }
 
-void GameEngine::set_player_character(Character *pCharacter) {
+void GameEngine::set_player_character(PlayerCharacter *pCharacter) {
     player_character = pCharacter;
 }
 
@@ -51,6 +51,6 @@ void GameEngine::add_command(const char *string, Command *pCommand) {
     commands[string] = pCommand;
 }
 
-Character * GameEngine::get_player_character() {
+PlayerCharacter *GameEngine::get_player_character() {
     return player_character;
 }

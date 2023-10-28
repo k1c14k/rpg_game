@@ -8,59 +8,32 @@
 #include <random>
 #include "../include/character/character.h"
 
-Character::Character(std::string name, unsigned int level, unsigned int health, unsigned int experience,
-                     const std::map<std::string, Ability *> &abilities) : name(std::move(name)), level(level),
-                                                                          health(health),
-                                                                          experience(experience),
-                                                                          abilities(abilities) {}
+BaseCharacter::BaseCharacter(std::string name, unsigned int health, const std::map<std::string, Ability *> &abilities)
+        : name(std::move(name)),
+          abilities(abilities),
+          health(health) {}
 
-const std::string &Character::get_name() const {
+const std::string &BaseCharacter::get_name() const {
     return name;
 }
 
-unsigned int Character::get_level() const {
-    return level;
-}
-
-unsigned int Character::get_health() const {
+unsigned int BaseCharacter::get_health() const {
     return health;
 }
 
-unsigned int Character::get_experience() const {
-    return experience;
-}
-
-const std::map<std::string, Ability *> &Character::get_abilities() const {
+const std::map<std::string, Ability *> &BaseCharacter::get_abilities() const {
     return abilities;
 }
 
-unsigned long Character::get_attack() const {
-    unsigned long max_attack = level < 5 ? level : 5;
-    std::random_device rd;
-    std::mt19937 mt(rd());
-    std::uniform_int_distribution<unsigned int> dist(0, max_attack);
-    return dist(mt);
-}
-
-void Character::take_damage(unsigned long damage) {
+void BaseCharacter::take_damage(unsigned long damage) {
     unsigned long damage_taken = damage * 60;
     health -= damage_taken > health ? health : damage_taken;
 }
 
-Ability *Character::get_ability(const std::string &ability) {
+Ability *BaseCharacter::get_ability(const std::string &ability) {
     return abilities[ability];
 }
 
-bool Character::is_alive() const {
+bool BaseCharacter::is_alive() const {
     return health > 0;
-}
-
-void Character::add_experience(unsigned long experience_gained) {
-    this->experience += experience_gained;
-
-}
-
-void Character::subtract_experience(unsigned long experience_lost) {
-    this->experience -= experience_lost;
-
 }

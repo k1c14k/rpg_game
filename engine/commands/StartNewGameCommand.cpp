@@ -12,7 +12,7 @@ void StartNewGameCommand::run(std::string params) {
     std::string name = prompt_for_name();
     std::string character_class = prompt_for_class();
     AbstractCharacterFactory *factory = AbstractCharacterFactory::get_factory(character_class);
-    Character *character = factory->create_player(name);
+    PlayerCharacter *character = factory->create_player(name);
 
     engine->set_player_character(character);
     engine->add_command("info", new InfoCommand(engine));
