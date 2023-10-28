@@ -5,32 +5,43 @@
 #ifndef RPG_GAME_FACTORY_H
 #define RPG_GAME_FACTORY_H
 
+#include <vector>
 #include "character.h"
 
-class CharacterFactory {
+class AbstractCharacterFactory {
 public:
-    virtual Character *createWarrior(const std::string &name) = 0;
+    virtual PlayerCharacter * create_player(std::string &name) = 0;
 
-    virtual Character *createMage(const std::string &name) = 0;
+    virtual BaseCharacter *create_random_opponent(unsigned int level) = 0;
 
-    virtual Character *createArcher(const std::string &name) = 0;
+    static BaseCharacter *create_opponent(unsigned int level);
 
-    Character *create(const std::string &character_class, const std::string &name);
+    static AbstractCharacterFactory *get_factory(const std::string &character_class);
 };
 
-class PlayerCharacterFactory : public CharacterFactory {
+class WarriorCharacterFactory : public AbstractCharacterFactory {
+private:
+    std::vector<std::string> WEAPON_CHOICES = {"sword", "dagger"};
 public:
-    Character *createWarrior(const std::string &name) override;
+    PlayerCharacter * create_player(std::string &name) override;
 
-    Character *createMage(const std::string &name) override;
+    BaseCharacter *create_random_opponent(unsigned int level) override;
+};
 
-    Character *createArcher(const std::string &name) override;
+class MageCharacterFactory : public AbstractCharacterFactory {
+private:
+    std::vector<std::string> MAGIC_CHOICES = {"fire", "ice"};
+public:
+    PlayerCharacter * create_player(std::string &name) override;
 
-    static bool is_valid_weapon(const std::string &basicString);
+    BaseCharacter *create_random_opponent(unsigned int level) override;
+};
 
-    static bool is_valid_magic_type(const std::string &magic);
+class ArcherCharacterFactory : public AbstractCharacterFactory {
+public:
+    PlayerCharacter * create_player(std::string &name) override;
 
-    static bool is_valid_tension_weapon(std::string &basicString);
+    BaseCharacter *create_random_opponent(unsigned int level) override;
 };
 
 #endif //RPG_GAME_FACTORY_H

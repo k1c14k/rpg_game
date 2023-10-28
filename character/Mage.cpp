@@ -5,15 +5,12 @@
 
 
 #include "../include/character/character.h"
+#include "../include/util.h"
 
 std::string Mage::character_class() {
     return "mage";
 }
 
-std::string FireballAbility::get_title() {
-    return "fireball";
-}
-
-std::string IceballAbility::get_title() {
-    return "ice ball";
+unsigned long Mage::get_attack() const {
+    return random_uint(10);
 }

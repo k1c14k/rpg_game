@@ -18,17 +18,17 @@ public:
     explicit HelpCommand(GameEngine *engine);
 };
 
-class QuitCommand: public Command {
+class QuitCommand : public Command {
     void run(std::string params) override;
 
 public:
     std::string get_title() override;
 
 public:
-    explicit QuitCommand(GameEngine *pEngine): engine(pEngine) {};
+    explicit QuitCommand(GameEngine *pEngine) : engine(pEngine) {};
 
 private:
-    GameEngine* engine;
+    GameEngine *engine;
 };
 
 class StartNewGameCommand : public Command {
@@ -36,12 +36,15 @@ class StartNewGameCommand : public Command {
 
     GameEngine *engine;
 public:
-
     std::string get_title() override;
 
-    static bool is_valid_class(const std::string &basicString);
-
     explicit StartNewGameCommand(GameEngine *pEngine) : engine(pEngine) {};
+private:
+    static std::string prompt_for_name();
+
+    static std::string prompt_for_class();
+
+    static bool is_valid_class(const std::string &basicString);
 };
 
 class InfoCommand : public Command {
@@ -54,4 +57,5 @@ public:
 
     explicit InfoCommand(GameEngine *pEngine) : engine(pEngine) {};
 };
+
 #endif //RPG_GAME_ENGINE_COMMANDS_H

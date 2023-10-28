@@ -3,15 +3,12 @@
 //
 
 #include "../include/character/character.h"
+#include "../include/util.h"
 
 std::string Warrior::character_class() {
     return "warrior";
 }
 
-std::string SwordAbility::get_title() {
-    return "Sword fight";
-}
-
-std::string DaggerAbility::get_title() {
-    return "Dagger fight";
+unsigned long Warrior::get_attack() const {
+    return random_uint(30);
 }
