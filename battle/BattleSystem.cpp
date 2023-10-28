@@ -57,7 +57,7 @@ unsigned int BattleSystem::experience_for_level(unsigned int level) {
 
 void BattleSystem::opponent_action(Character *player, Character *opponent) {
     unsigned int action = random_uint(1);
-    unsigned long damage = 0;
+    unsigned long damage;
     std::vector<std::string> abilities;
     std::string ability_chosen;
     switch (action) {
@@ -76,6 +76,7 @@ void BattleSystem::opponent_action(Character *player, Character *opponent) {
             break;
         default:
             std::cout << opponent->get_name() << " decided to scratch their butt instead!" << std::endl;
+            damage = 0;
             break;
     }
     player->take_damage(damage);
