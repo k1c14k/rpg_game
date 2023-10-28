@@ -59,7 +59,7 @@ void BattleSystem::opponent_action(Character *player, Character *opponent) {
     unsigned int action = random_uint(1);
     unsigned long damage = 0;
     std::vector<std::string> abilities;
-    std::string ability = random_choice(abilities);
+    std::string ability_chosen;
     switch (action) {
         case 0:
             damage = opponent->get_attack();
@@ -69,9 +69,10 @@ void BattleSystem::opponent_action(Character *player, Character *opponent) {
             for (auto &ability: opponent->get_abilities()) {
                 abilities.push_back(ability.first);
             }
-
-            damage = opponent->get_ability(ability)->get_damage();
-            std::cout << opponent->get_name() << " dealt " << damage << " damage using " << ability << "!" << std::endl;
+            ability_chosen = random_choice(abilities);
+            damage = opponent->get_ability(ability_chosen)->get_damage();
+            std::cout << opponent->get_name() << " dealt " << damage << " damage using " << ability_chosen << "!"
+                      << std::endl;
             break;
         default:
             std::cout << opponent->get_name() << " decided to scratch their butt instead!" << std::endl;
