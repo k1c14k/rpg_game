@@ -26,7 +26,7 @@ const std::map<std::string, Ability *> &BaseCharacter::get_abilities() const {
 }
 
 void BaseCharacter::take_damage(unsigned long damage) {
-    unsigned long damage_taken = damage * 60;
+    unsigned long damage_taken = damage;
     health -= damage_taken > health ? health : damage_taken;
 }
 

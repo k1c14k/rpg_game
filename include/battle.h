@@ -28,6 +28,11 @@ public:
     static void start_battle(PlayerCharacter *player, BaseCharacter *opponent);
 
     static unsigned int experience_for_level(unsigned int level);
+
+private:
+    static void player_action(Character *player, Character *opponent);
+
+    static void opponent_action(Character *player, Character *opponent);
 };
 
 #endif //RPG_GAME_BATTLE_H
